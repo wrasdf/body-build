@@ -23,11 +23,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var gyroY: UILabel!
     @IBOutlet weak var gyroZ: UILabel!
     
+    @IBOutlet weak var gyroTestX: UILabel!
+    @IBOutlet weak var gyroTestY: UILabel!
+    @IBOutlet weak var gyroTestZ: UILabel!
+    
     
     
     let deviceMotionInterval = 0.1
 //    let accelerometerInterval = 0.01
-//    let gyroscopeInterval = 0.5;
+    let gyroscopeInterval = 0.1;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,34 +62,34 @@ class ViewController: UIViewController {
                     self.accZlabel.text = "AccZ : \(deviceAccelData.z)"
                     
                     var deviceRotaionData = motionManager.deviceMotion.rotationRate
-                    self.gyroX.text = "Gyroscope X  : \(deviceRotaionData.x)"
-                    self.gyroY.text = "Gyroscope Y : \(deviceRotaionData.y)"
-                    self.gyroZ.text = "Gyroscope Z : \(deviceRotaionData.z)"
+                    self.gyroX.text = "Gyro X  : \(deviceRotaionData.x)"
+                    self.gyroY.text = "Gyro Y : \(deviceRotaionData.y)"
+                    self.gyroZ.text = "Gyro Z : \(deviceRotaionData.z)"
                     
                 }
 
         })
         
-//        if (motionManager.gyroAvailable) {
-//        
-//            motionManager.gyroUpdateInterval = gyroscopeInterval
-//            motionManager.startGyroUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler: {
-//                (gyroData, error) in
-//                
-//                if error != nil {
-//                    motionManager.stopGyroUpdates()
-//                    return
-//                }
-//                
-//                gyroData.rotationRate
-//                self.gyroX.text = "AccX : \(gyroData.rotationRate.x)"
-//                self.gyroY.text = "AccY : \(gyroData.rotationRate.y)"
-//                self.gyroZ.text = "AccZ : \(gyroData.rotationRate.z)"
-//
-//                
-//            })
-//            
-//        }
+        if (motionManager.gyroAvailable) {
+        
+            motionManager.gyroUpdateInterval = gyroscopeInterval
+            motionManager.startGyroUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler: {
+                (gyroData, error) in
+                
+                if error != nil {
+                    motionManager.stopGyroUpdates()
+                    return
+                }
+                
+                gyroData.rotationRate
+                self.gyroTestX.text = "gyroTestX : \(gyroData.rotationRate.x)"
+                self.gyroTestY.text = "gyroTestY : \(gyroData.rotationRate.y)"
+                self.gyroTestZ.text = "gyroTestZ : \(gyroData.rotationRate.z)"
+
+                
+            })
+            
+        }
         
         
         
