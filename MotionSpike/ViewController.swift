@@ -27,7 +27,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var gyroTestY: UILabel!
     @IBOutlet weak var gyroTestZ: UILabel!
     
+    @IBOutlet weak var magnetometerLabelX: UILabel!
+    @IBOutlet weak var magnetometerlabelY: UILabel!
+    @IBOutlet weak var magnetometerlabelZ: UILabel!
     
+
     
     let deviceMotionInterval = 0.1
 //    let accelerometerInterval = 0.01
@@ -66,6 +70,13 @@ class ViewController: UIViewController {
                     self.gyroY.text = "Gyro Y : \(deviceRotaionData.y)"
                     self.gyroZ.text = "Gyro Z : \(deviceRotaionData.z)"
                     
+                    // it not works
+//                    var deviceMagnetometerData = motionManager.deviceMotion.magneticField.field
+//                    self.magnetometerLabelX.text = "magnetometerX : \(deviceMagnetometerData.x)"
+//                    self.magnetometerlabelY.text = "magnetometerY : \(deviceMagnetometerData.y)"
+//                    self.magnetometerlabelZ.text = "magnetometerZ : \(deviceMagnetometerData.z)"
+                    
+                    
                 }
 
         })
@@ -85,7 +96,6 @@ class ViewController: UIViewController {
                 self.gyroTestX.text = "gyroTestX : \(gyroData.rotationRate.x)"
                 self.gyroTestY.text = "gyroTestY : \(gyroData.rotationRate.y)"
                 self.gyroTestZ.text = "gyroTestZ : \(gyroData.rotationRate.z)"
-
                 
             })
             
@@ -110,6 +120,21 @@ class ViewController: UIViewController {
 //                
 //            }
 //        }
+        
+        
+        
+        motionManager.magnetometerUpdateInterval  = 1.0/10.0; // Update at 10Hz
+        if (motionManager.magnetometerAvailable) {
+            motionManager.startMagnetometerUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler: {
+                (data, error) in
+                
+                var deviceMagnetometerData = data.magneticField
+                self.magnetometerLabelX.text = "magnetometerX : \(deviceMagnetometerData.x)"
+                self.magnetometerlabelY.text = "magnetometerY : \(deviceMagnetometerData.y)"
+                self.magnetometerlabelZ.text = "magnetometerZ : \(deviceMagnetometerData.z)"
+                
+            })
+        }
         
         
         
