@@ -31,11 +31,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var magnetometerlabelY: UILabel!
     @IBOutlet weak var magnetometerlabelZ: UILabel!
     
-
+    @IBOutlet weak var gravityX: UILabel!
+    @IBOutlet weak var gravityY: UILabel!
+    @IBOutlet weak var gravityZ: UILabel!
     
     let deviceMotionInterval = 0.1
 //    let accelerometerInterval = 0.01
-    let gyroscopeInterval = 0.1;
+    let gyroscopeInterval = 0.1
+    let π = 3.1415926
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,20 +58,28 @@ class ViewController: UIViewController {
                 
                 if let deviceMotion = motionManager.deviceMotion {
                     
-                    var deviceMotionData = motionManager.deviceMotion.attitude
-                    self.pitchLabel.text = "Pitch : \(deviceMotionData.pitch)"
-                    self.RollLabel.text = "Roll : \(deviceMotionData.roll)"
-                    self.yawLabel.text = "Yaw : \(deviceMotionData.yaw)"
+//                    var deviceMotionData = motionManager.deviceMotion.attitude
+//                    self.pitchLabel.text = "Pitch : \(deviceMotionData.pitch*(180/self.π))"
+//                    self.RollLabel.text = "Roll : \(deviceMotionData.roll*(180/self.π))"
+//                    self.yawLabel.text = "Yaw : \(deviceMotionData.yaw*(180/self.π))"
+//                    
+//                    var deviceAccelData = motionManager.deviceMotion.userAcceleration
+//                    self.accXLabel.text = "AccX : \(deviceAccelData.x)"
+//                    self.accYLabel.text = "AccY : \(deviceAccelData.y)"
+//                    self.accZlabel.text = "AccZ : \(deviceAccelData.z)"
+//                    
+//                    var deviceRotaionData = motionManager.deviceMotion.rotationRate
+//                    self.gyroX.text = "Gyro X  : \(deviceRotaionData.x)"
+//                    self.gyroY.text = "Gyro Y : \(deviceRotaionData.y)"
+//                    self.gyroZ.text = "Gyro Z : \(deviceRotaionData.z)"
+
                     
-                    var deviceAccelData = motionManager.deviceMotion.userAcceleration
-                    self.accXLabel.text = "AccX : \(deviceAccelData.x)"
-                    self.accYLabel.text = "AccY : \(deviceAccelData.y)"
-                    self.accZlabel.text = "AccZ : \(deviceAccelData.z)"
+                    var deviceGravityData = motionManager.deviceMotion.gravity
+                    self.gravityX.text = "gravityX  : \(deviceGravityData.x)"
+                    self.gravityY.text = "gravityY : \(deviceGravityData.y)"
+                    self.gravityZ.text = "gravityZ : \(deviceGravityData.z)"
                     
-                    var deviceRotaionData = motionManager.deviceMotion.rotationRate
-                    self.gyroX.text = "Gyro X  : \(deviceRotaionData.x)"
-                    self.gyroY.text = "Gyro Y : \(deviceRotaionData.y)"
-                    self.gyroZ.text = "Gyro Z : \(deviceRotaionData.z)"
+                    
                     
                     // it not works
 //                    var deviceMagnetometerData = motionManager.deviceMotion.magneticField.field
